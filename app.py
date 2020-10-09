@@ -122,7 +122,7 @@ def get_api_token():
     final_string = ''.join(sample_list)
 
     # API_TOKEN
-    API["API_KEY] = final_string
+    API["API_KEY"] = final_string
     final_list = list(final_string)
     random.shuffle(final_list)
 
