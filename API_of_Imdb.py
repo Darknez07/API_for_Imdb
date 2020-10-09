@@ -20,6 +20,6 @@ except:
 finally:
 
     sql = sqlite3.connect('db/Imdb.db')
-    db = pd.read_csv('../ImdbRated1000.csv')
+    db = pd.read_csv('ImdbRated1000.csv')
     db["Id"] = np.array([i[0].split('/')[4][2:] for i in db[['Movie_Url']].values])
     db.to_sql('Movies', con=sql,if_exists='append', index=False)
