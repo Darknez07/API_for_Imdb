@@ -6,8 +6,9 @@
 <br>// TODO: The More versatile queries and helpful--> Done
 <br>// TODO: Documentation of the API
 <br>// TODO: Publish the api more broader data
-### The api works with tokens
-### pass the key value pair for the tokens obtained
-### visiting "token" routes will give out the api key
-## Note please add api key in header of the request
-## as key value pair
+<br> The steps to use the API
+<ol>
+  <li>The token route i.e [Generate token](https://imdb-api-12.herokuapp.com/token)</li>
+  <li>For every request we need a new token </li>
+  <li>It will be good if you automate</li>
+</ol>
