@@ -122,13 +122,13 @@ def get_api_token():
     final_string = ''.join(sample_list)
 
     # API_TOKEN
-    API["API_TOKEN"] = final_string
+    API["API_KEY] = final_string
     final_list = list(final_string)
     random.shuffle(final_list)
 
     #API_PASSWORD
 
-    API["API_PASSWORD"] = ''.join(final_list)
+    API["API_VALUE"] = ''.join(final_list)
     return jsonify([{"API_KEYPAIR":API,
                     "Message":"Use this API Key to GET data"}])
 
@@ -141,7 +141,7 @@ def movie():
     string = request.query_string.decode('utf-8').split('?')
     # looping over the string
     try:
-        if request.headers[API["API_TOKEN"]] == API["API_PASSWORD"]:
+        if request.headers[API["API_KEY"]] == API["API_VALUE"]:
             for i in string:
                 l = i.split('=')
                 # defining each query:
@@ -190,7 +190,7 @@ def movies(num):
     # API authentication
     # This gets the n random movies from database
     try:
-        if request.headers[API["API_TOKEN"]] == API["API_PASSWORD"]:
+        if request.headers[API["API_KEY"]] == API["API_VALUE"]:
             db =get_db()
             results = db.execute('select * from Movies order by random() limit ?',[num])
             results = results.fetchall()
