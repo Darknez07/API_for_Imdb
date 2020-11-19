@@ -8,7 +8,7 @@
 <br>// TODO: Publish the api more broader data
 <br> The steps to use the API
 <ol>
-  <li>The token route i.e [Generate token](https://imdb-api-12.herokuapp.com/token)</li>
+  <li>The token route i.e (https://imdb-api-12.herokuapp.com/token)[Generate token]</li>
   <li>For every request we need a new token </li>
   <li>It will be good if you automate</li>
 </ol>
