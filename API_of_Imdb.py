@@ -10,7 +10,7 @@ digits_count = 12
 
 try:
 
-    stdo = subprocess.check_output(['scrapy','crawl','Movies','-o','ImdbRated1000.csv'],
+    stdo = subprocess.check_output(['scrapy','crawl','Imdb','-o','ImdbRated1000.csv'],
                                stderr=subprocess.STDOUT,
                                timeout=120) # 2 mins
 except:
@@ -18,7 +18,6 @@ except:
     print("Done Gathering data")
 
 finally:
-
     sql = sqlite3.connect('db/Imdb.db')
     db = pd.read_csv('ImdbRated1000.csv')
     db["Id"] = np.array([i[0].split('/')[4][2:] for i in db[['Movie_Url']].values])
