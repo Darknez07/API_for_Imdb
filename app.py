@@ -17,7 +17,7 @@ cols=["Id",
      "Speciality",
      "Idea",
      "Raters Count",
-     "Reccomandations"]
+     "Recommandations"]
 letters_count = 20
 digits_count = 12
 
@@ -65,9 +65,9 @@ def check_year(l,wanted,db):
 def find(result, wanted):
     arr = []
     for i in result:
-        if wanted and wanted[1].lower() == cols[-1].lower():
-            # If we want reccomandations
-            arr = arr + i[wanted[1]].split(',')
+        if wanted and wanted[1].lower() in cols[-1].lower():
+           # If we want reccomandations
+            arr = i[cols[-1]].split(',')
         elif wanted and wanted[1].lower() in list(map(str.lower,cols)):
             # anything else wanted here
             arr.append({wanted[1]:i[wanted[1]],
@@ -75,6 +75,7 @@ def find(result, wanted):
         else:
             # only titles if simple query
             arr.append({"result":i["Title"]})
+    print(arr)
     return arr
 
 def check(l,wanted,db,col):
@@ -92,7 +93,7 @@ def check(l,wanted,db,col):
         print(query)
         result = db.execute(query)
         result = result.fetchall()
-
+        # print(result)
     else:
         # If not query able do the regular regime
         if '%20' in l[1]:
@@ -129,6 +130,7 @@ def get_api_token():
     #API_PASSWORD
 
     API["API_VALUE"] = ''.join(final_list)
+    print(API)
     return jsonify([{"API_KEYPAIR":API,
                     "Message":"Use this API Key to GET data"}])
 
@@ -146,10 +148,10 @@ def movie():
                 l = i.split('=')
                 # defining each query:
                 db = get_db()
-                print(list(map(str.lower,cols[3:])))
+                clms = list(map(str.lower,cols))
                 if len(l) == 2:
                     # Checking if l has enough elements
-                    if l[0].lower() in cols[0]:
+                    if l[0].lower() in clms[0]:
                         # getting everything if Id is present
                         result = db.execute('select * from movies where id=?',[l[1]])
                         result = result.fetchone()
@@ -169,7 +171,7 @@ def movie():
                         result, wanted = check(l,wanted,db,cols[1].lower())
                         arr = find(result,wanted)
                         # What can wanted do
-                        if wanted and wanted[1] == cols[-1]:
+                        if wanted and wanted[1].lower() in cols[-1].lower():
                             # Return reccomendations if requested
                             return jsonify({"Reccomends": list(set(arr))})
                         return jsonify(arr)
