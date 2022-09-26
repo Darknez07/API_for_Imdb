@@ -6,7 +6,7 @@ import json
 
 
 class MoviesSpider(CrawlSpider):
-    name = "Movies"
+    name = "Imdb"
     allowed_domains = ["imdb.com"]
     # Request Headers Spoofed
     user_agent = (
