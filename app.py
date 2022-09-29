@@ -1,4 +1,5 @@
-from flask import Flask, g, jsonify, request
+import os
+from flask import Flask, g, jsonify, request, render_template, send_from_directory
 import sqlite3
 import random
 import string
@@ -104,12 +105,16 @@ def check(l,wanted,db,col):
         result = db.execute(query)
         result = result.fetchall()
     return result, wanted
-app = Flask(__name__)
+app = Flask(__name__,static_folder='templates',static_url_path='')
 
 @app.teardown_appcontext
 def close_db(err):
     if hasattr(g,'sqlite3_db'):
         g.sqlite3_db.close()
+
+@app.route("/")
+def entry():
+    return send_from_directory(app.static_folder,'index.html')
 
 @app.route("/token",methods=['GET'])
 def get_api_token():
